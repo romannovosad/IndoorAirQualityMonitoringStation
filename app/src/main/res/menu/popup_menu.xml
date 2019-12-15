@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/one"
+            android:orderInCategory="0"
+            android:title="1 second" />
+        <item
+            android:id="@+id/two"
+            android:orderInCategory="1"
+            android:title="10 seconds" />
+        <item
+            android:id="@+id/three"
+            android:orderInCategory="2"
+            android:title="1 minute" />
+        <item
+            android:id="@+id/four"
+            android:orderInCategory="3"
+            android:title="10 minutes" />
+        <item
+            android:id="@+id/five"
+            android:orderInCategory="4"
+            android:title="20 minutes" />
+    </group>
+</menu>
