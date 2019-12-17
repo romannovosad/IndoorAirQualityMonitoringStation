@@ -1,83 +1,298 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activities.MainActivity">
 
 
-        <ImageView
-            android:id="@+id/button"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:scaleType="fitXY"
-            android:layout_margin="10dp"
-            android:src="@drawable/material_design_settings_icon"
-            android:layout_gravity="left"/>
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="799dp"
+        android:layout_height="488dp"
+        android:layout_marginEnd="1dp"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/green" />
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/settings_button"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/material_design_settings_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/temperature"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="335dp"
+        android:layout_marginEnd="400dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="27.4" />
 
-        <TextView
-            android:id="@+id/temperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1234"
-            android:layout_margin="10dp" />
-
-        <TextView
-            android:id="@+id/humidity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1234"
-            android:layout_margin="10dp" />
-
-        <TextView
-            android:id="@+id/pressure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1234"
-            android:layout_margin="10dp" />
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/pressure"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="600dp"
+        android:layout_marginBottom="320dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1013.2" />
 
-        <TextView
-            android:id="@+id/co2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1234"
-            android:layout_margin="10dp" />
-
-        <TextView
-            android:id="@+id/tvoc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1234"
-            android:layout_margin="10dp" />
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/humidity"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="400dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginBottom="320dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="54.1" />
 
-        <TextView
-            android:id="@+id/pm25"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1234"
-            android:layout_margin="10dp" />
+    <TextView
+        android:id="@+id/pm10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvoc"
+        app:layout_constraintStart_toStartOf="@+id/tvoc"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="54" />
 
-        <TextView
-            android:id="@+id/pm10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1234"
-            android:layout_margin="10dp" />
-    </LinearLayout>
-</LinearLayout>
+    <TextView
+        android:id="@+id/tvoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/pressure"
+        app:layout_constraintStart_toStartOf="@+id/pressure"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="11" />
+
+    <TextView
+        android:id="@+id/pm25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/co2"
+        app:layout_constraintStart_toStartOf="@+id/co2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="10" />
+
+    <TextView
+        android:id="@+id/co2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/humidity"
+        app:layout_constraintStart_toStartOf="@+id/humidity"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="500" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        app:layout_constraintBottom_toTopOf="@+id/status_label"
+        app:layout_constraintEnd_toEndOf="@+id/status_label"
+        app:layout_constraintStart_toStartOf="@+id/status_label"
+        tools:text="Good"
+        android:text="Good" />
+
+    <TextView
+        android:id="@+id/status_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/temperature"
+        app:layout_constraintEnd_toEndOf="@+id/temperature"
+        app:layout_constraintStart_toStartOf="@+id/temperature"
+        tools:text="Everything looks good"
+        android:text="Everything looks good" />
+
+    <TextView
+        android:id="@+id/temperature_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="@+id/temperature"
+        app:layout_constraintStart_toStartOf="@+id/temperature"
+        app:layout_constraintTop_toBottomOf="@+id/temperature"
+        tools:text="Temperature"
+        android:text="Temperature"/>
+
+    <ImageView
+        android:id="@+id/status_image"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toTopOf="@+id/status"
+        app:layout_constraintEnd_toEndOf="@+id/status"
+        app:layout_constraintStart_toStartOf="@+id/status"
+        android:src="@drawable/fair" />
+
+    <TextView
+        android:id="@+id/humidity_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Humidity"
+        app:layout_constraintEnd_toEndOf="@+id/humidity_unit"
+        app:layout_constraintStart_toStartOf="@+id/humidity"
+        app:layout_constraintTop_toBottomOf="@+id/humidity"
+        tools:text="Humidity" />
+
+    <TextView
+        android:id="@+id/pressure_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Air Pressure"
+        app:layout_constraintEnd_toEndOf="@+id/pressure"
+        app:layout_constraintStart_toStartOf="@+id/pressure"
+        app:layout_constraintTop_toBottomOf="@+id/pressure"
+        tools:text="Air Pressure" />
+
+    <TextView
+        android:id="@+id/pm25_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dust PM 2.5"
+        app:layout_constraintEnd_toEndOf="@+id/pm25"
+        app:layout_constraintStart_toStartOf="@+id/pm25"
+        app:layout_constraintTop_toBottomOf="@+id/pm25"
+        tools:text="Dust PM 2.5" />
+
+    <TextView
+        android:id="@+id/pm10_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dust PM 10"
+        app:layout_constraintEnd_toEndOf="@+id/pm10"
+        app:layout_constraintStart_toStartOf="@+id/pm10"
+        app:layout_constraintTop_toBottomOf="@+id/pm10"
+        tools:text="Dust PM 10" />
+
+    <TextView
+        android:id="@+id/co2_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CO2"
+        app:layout_constraintEnd_toEndOf="@+id/co2"
+        app:layout_constraintStart_toStartOf="@+id/co2"
+        app:layout_constraintTop_toBottomOf="@+id/co2"
+        tools:text="CO2" />
+
+    <TextView
+        android:id="@+id/tvoc_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TVOC"
+        app:layout_constraintEnd_toEndOf="@+id/tvoc"
+        app:layout_constraintStart_toStartOf="@+id/tvoc"
+        app:layout_constraintTop_toBottomOf="@+id/tvoc"
+        tools:text="TVOC" />
+
+    <TextView
+        android:id="@+id/humidity_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="%"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toBottomOf="@+id/humidity"
+        app:layout_constraintStart_toEndOf="@+id/humidity"
+        tools:text="%" />
+
+    <TextView
+        android:id="@+id/tvoc_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ppm"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toBottomOf="@+id/tvoc"
+        app:layout_constraintStart_toEndOf="@+id/tvoc"
+        tools:text="ppm" />
+
+    <TextView
+        android:id="@+id/pm10_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ug/m3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toBottomOf="@+id/pm10"
+        app:layout_constraintStart_toEndOf="@+id/pm10"
+        tools:text="ug/m3" />
+
+    <TextView
+        android:id="@+id/pm25_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ug/m3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toBottomOf="@+id/pm25"
+        app:layout_constraintStart_toEndOf="@+id/pm25"
+        tools:text="ug/m3" />
+
+    <TextView
+        android:id="@+id/pressure_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hPa"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toBottomOf="@+id/pressure"
+        app:layout_constraintStart_toEndOf="@+id/pressure"
+        tools:text="hPa" />
+
+    <TextView
+        android:id="@+id/co2_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ppm"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toBottomOf="@+id/co2"
+        app:layout_constraintStart_toEndOf="@+id/co2"
+        tools:text="ppm" />
+
+    <TextView
+        android:id="@+id/temperature_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="°C"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toTopOf="@+id/temperature_label"
+        app:layout_constraintStart_toEndOf="@+id/temperature"
+        tools:text="°C" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

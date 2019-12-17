@@ -46,7 +46,7 @@ class MainActivity : Activity() {
         val sharedPref = getSharedPreferences(SHARED_PREFERENCES_KEY, PRIVATE_MODE)
         setIntervalMode(sharedPref.getInt(SHARED_PREFERENCES_KEY, 0))
 
-        val settingsButton = findViewById<ImageView>(R.id.button)
+        val settingsButton = findViewById<ImageView>(R.id.settings_button)
         settingsButton.setOnClickListener {
             val settingsPopup = PopupMenu(this@MainActivity, settingsButton)
             settingsPopup.menuInflater.inflate(R.menu.popup_menu, settingsPopup.menu)
@@ -117,9 +117,9 @@ class MainActivity : Activity() {
             val temperature = mBmx280.readTemperature()
             val humidity = mBmx280.readHumidity()
             val pressure = mBmx280.readPressure()
-            temperatureView.text = temperature.toString()
-            humidityView.text = humidity.toString()
-            pressureView.text = pressure.toString()
+            temperatureView.text = String.format("%.1f", temperature)
+            humidityView.text = String.format("%.1f", humidity)
+            pressureView.text = String.format("%.1f", pressure)
         } catch (e: IOException) {
             // error reading temperature/humidity/pressure
         }
@@ -136,8 +136,8 @@ class MainActivity : Activity() {
         try {
             val pm25 = mSds011.readPM()[0]
             val pm10 = mSds011.readPM()[1]
-            pm25View.text = pm25.toString()
-            pm10View.text = pm10.toString()
+            pm25View.text = String.format("%.1f", pm25)
+            pm10View.text = String.format("%.1f", pm10)
         } catch (e: IOException) {
             // error reading PM values
         }
