@@ -10,8 +10,10 @@ import android.widget.*
 import com.novosad.indoorairqualitymonitoringstation.drivers.Bmx280
 import com.novosad.indoorairqualitymonitoringstation.drivers.Ccs811
 import com.novosad.indoorairqualitymonitoringstation.drivers.Sds011
+import com.novosad.indoorairqualitymonitoringstation.models.SensorData
 import com.novosad.indoorairqualitymonitoringstation.contstants.Constants
 import com.novosad.indoorairqualitymonitoringstation.R
+import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
 
 
@@ -25,6 +27,8 @@ class MainActivity : Activity() {
     private val mCcs811 = Ccs811(Constants.CCS811_PORT)
     private val mSds011 = Sds011(Constants.SDS011_PORT)
 
+    private val sensorData = SensorData()
+
     private var mInterval = Constants.UPDATE_INTERVAL_EXTRA_SHORT
 
     private var mHandler: Handler = Handler()
@@ -35,6 +39,7 @@ class MainActivity : Activity() {
     private var mPeriodicSensorMeasurement: Runnable = object : Runnable {
         override fun run() {
             readValues()
+            updateView(sensorData)
             mHandler.postDelayed(this, mInterval.toLong())
         }
     }
@@ -105,42 +110,47 @@ class MainActivity : Activity() {
     }
 
     fun readValues() {
-        val temperatureView = findViewById<TextView>(R.id.temperature)
-        val humidityView = findViewById<TextView>(R.id.humidity)
-        val pressureView = findViewById<TextView>(R.id.pressure)
-        val co2View = findViewById<TextView>(R.id.co2)
-        val tvocView = findViewById<TextView>(R.id.tvoc)
-        val pm25View = findViewById<TextView>(R.id.pm25)
-        val pm10View = findViewById<TextView>(R.id.pm10)
-
         try {
-            val temperature = mBmx280.readTemperature()
-            val humidity = mBmx280.readHumidity()
-            val pressure = mBmx280.readPressure()
-            temperatureView.text = String.format("%.1f", temperature)
-            humidityView.text = String.format("%.1f", humidity)
-            pressureView.text = String.format("%.1f", pressure)
+            sensorData.temperature = mBmx280.readTemperature()
+            sensorData.humidity = mBmx280.readHumidity()
+            sensorData.pressure = mBmx280.readPressure()
         } catch (e: IOException) {
             // error reading temperature/humidity/pressure
         }
 
         try {
-            val co2 = mCcs811.readAlgorithmResults()[0]
-            val tvoc = mCcs811.readAlgorithmResults()[1]
-            co2View.text = co2.toString()
-            tvocView.text = tvoc.toString()
+            sensorData.co2 = mCcs811.readAlgorithmResults()[0]
+            sensorData.tvoc = mCcs811.readAlgorithmResults()[1]
         } catch (e: IOException) {
             // error reading co2/tvoc
         }
 
         try {
-            val pm25 = mSds011.readPM()[0]
-            val pm10 = mSds011.readPM()[1]
-            pm25View.text = String.format("%.1f", pm25)
-            pm10View.text = String.format("%.1f", pm10)
+            sensorData.pm25 = mSds011.readPM()[0]
+            sensorData.pm10 = mSds011.readPM()[1]
         } catch (e: IOException) {
             // error reading PM values
         }
+    }
+
+    private fun updateView(sensorData: SensorData) {
+        val temperatureView = temperature
+        val humidityView = humidity
+        val pressureView = pressure
+        val co2View = co2
+        val tvocView = tvoc
+        val pm25View = pm25
+        val pm10View = pm10
+
+        temperatureView.text = String.format("%.1f", sensorData.temperature)
+        humidityView.text = String.format("%.1f", sensorData.temperature)
+        pressureView.text = String.format("%.1f", sensorData.pressure)
+
+        co2View.text = sensorData.co2.toString()
+        tvocView.text = sensorData.tvoc.toString()
+
+        pm25View.text = String.format("%.1f", sensorData.pm25)
+        pm10View.text = String.format("%.1f", sensorData.pm10)
     }
 
     private fun setIntervalMode(id: Int) {
