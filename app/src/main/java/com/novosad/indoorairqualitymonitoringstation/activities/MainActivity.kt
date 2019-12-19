@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
@@ -16,6 +17,9 @@ import com.novosad.indoorairqualitymonitoringstation.R
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
 
+private const val TAG = "Sensor"
+private const val SHARED_PREFERENCES_KEY = "mode"
+private const val PRIVATE_MODE = Context.MODE_PRIVATE
 
 /**
  * This application will connect to BMX280, CCS811 and SDS011 sensors and collect sensor values,
@@ -37,9 +41,6 @@ class MainActivity : Activity() {
     private var mInterval = Constants.UPDATE_INTERVAL_EXTRA_SHORT
 
     private var mHandler: Handler = Handler()
-
-    private val SHARED_PREFERENCES_KEY = "mode"
-    private val PRIVATE_MODE = Context.MODE_PRIVATE
 
     private var mPeriodicSensorMeasurement: Runnable = object : Runnable {
         override fun run() {
@@ -111,6 +112,7 @@ class MainActivity : Activity() {
             mSds011.setMode(Sds011.MODE_REPORT)
         } catch (e: IOException) {
             // couldn't configure the device...
+            Log.e(TAG, "Error opening the sensors")
         }
     }
 
@@ -122,14 +124,14 @@ class MainActivity : Activity() {
             sensorData.humidity = mBmx280.readHumidity()
             sensorData.pressure = mBmx280.readPressure()
         } catch (e: IOException) {
-            // error reading temperature/humidity/pressure
+            Log.e(TAG, "Error reading temperature/humidity/pressure")
         }
 
         try {
             sensorData.co2 = mCcs811.readAlgorithmResults()[0]
             sensorData.tvoc = mCcs811.readAlgorithmResults()[1]
         } catch (e: IOException) {
-            // error reading co2/tvoc
+            Log.e(TAG, "Error reading co2/tvoc")
         }
 
         // sds011 will not throw an exception because the sensor decides when the data is available
@@ -241,13 +243,13 @@ class MainActivity : Activity() {
     }
 
     private fun closeSensors() {
-        // Close the environmental sensor when finished:
+        // Close the environmental sensors when finished
         try {
             mBmx280.close()
             mCcs811.close()
             mSds011.close()
         } catch (e: IOException) {
-            // error closing sensor
+            Log.e(TAG, "Error closing the sensors")
         }
     }
 
