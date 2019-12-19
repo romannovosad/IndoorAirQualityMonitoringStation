@@ -10,7 +10,20 @@ import com.google.android.things.pio.UartDeviceCallback
 
 private const val TAG = "Sds011"
 
-
+/**
+ * Driver for Nova PM SDS011 sensor.
+ *
+ * This class will make sure sensor is connected on appropriate UART port and reports data in given interval.
+ *
+ * Every time data from the sensor is available, callback is triggered - latest incoming is saved in a global variable.
+ * This means that when PM values are queried at any point,  their maximum possible age will be the length of the reporting interval.
+ *
+ * Sensor data sheet: https://cdn-reichelt.de/documents/datenblatt/X200/SDS011-DATASHEET.pdf
+ * Sensor control protocol: https://nettigo.pl/attachments/415
+ *
+ * @param sds011 the port name sensor is connected to
+ * @author Roman Novosad
+ */
 class Sds011(sds011: String) : AutoCloseable {
 
     private var inputThread: HandlerThread = HandlerThread("InputThread")
@@ -28,7 +41,7 @@ class Sds011(sds011: String) : AutoCloseable {
             do {
                 val read = sds011Sensor.read(buffer, buffer.size)
                 if (read > 0) {
-                    mBuffer = buffer.clone() //updateBuffer(buffer)
+                    mBuffer = buffer.clone()
                 }
             } while (read > 0)
 
@@ -42,7 +55,7 @@ class Sds011(sds011: String) : AutoCloseable {
     }
 
     init {
-        // Create a background looper thread for I/O
+        // Create a background thread for I/O
         inputThread.start()
         inputHandler = Handler(inputThread.looper)
 

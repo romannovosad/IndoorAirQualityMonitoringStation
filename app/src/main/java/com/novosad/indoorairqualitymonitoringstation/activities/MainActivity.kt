@@ -18,8 +18,15 @@ import java.io.IOException
 
 
 /**
+ * This application will connect to BMX280, CCS811 and SDS011 sensors and collect sensor values,
+ * which are then posted to UI in chosen intervals. Ui is interactive, so it will change depending
+ * on a number of value thresholds defined based on their real world significance.
  *
+ * For BMX280 driver see https://github.com/androidthings/contrib-drivers/tree/master/bmx280.
+ * For CCS811 driver see https://github.com/rosterloh/androidthings-drivers/tree/master/ccs811.
+ * SDS011 driver is written by me.
  *
+ * @author Roman Novosad
  */
 class MainActivity : Activity() {
 
