@@ -4,22 +4,22 @@
         <item
             android:id="@+id/one"
             android:orderInCategory="0"
-            android:title="1 second" />
+            android:title="@string/update_interval_extra_short" />
         <item
             android:id="@+id/two"
             android:orderInCategory="1"
-            android:title="10 seconds" />
+            android:title="@string/update_interval_short" />
         <item
             android:id="@+id/three"
             android:orderInCategory="2"
-            android:title="1 minute" />
+            android:title="@string/update_interval_medium" />
         <item
             android:id="@+id/four"
             android:orderInCategory="3"
-            android:title="10 minutes" />
+            android:title="@string/update_interval_long" />
         <item
             android:id="@+id/five"
             android:orderInCategory="4"
-            android:title="20 minutes" />
+            android:title="@string/update_interval_extra_long" />
     </group>
 </menu>

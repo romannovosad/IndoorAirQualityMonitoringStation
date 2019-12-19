@@ -27,8 +27,6 @@ class MainActivity : Activity() {
     private val mCcs811 = Ccs811(Constants.CCS811_PORT)
     private val mSds011 = Sds011(Constants.SDS011_PORT)
 
-    private val sensorData = SensorData()
-
     private var mInterval = Constants.UPDATE_INTERVAL_EXTRA_SHORT
 
     private var mHandler: Handler = Handler()
@@ -38,8 +36,7 @@ class MainActivity : Activity() {
 
     private var mPeriodicSensorMeasurement: Runnable = object : Runnable {
         override fun run() {
-            readValues()
-            updateView(sensorData)
+            updateView(readValues())
             mHandler.postDelayed(this, mInterval.toLong())
         }
     }
@@ -55,7 +52,8 @@ class MainActivity : Activity() {
         settingsButton.setOnClickListener {
             val settingsPopup = PopupMenu(this@MainActivity, settingsButton)
             settingsPopup.menuInflater.inflate(R.menu.popup_menu, settingsPopup.menu)
-            settingsPopup.menu.getItem(sharedPref.getInt(SHARED_PREFERENCES_KEY, 0)).isChecked = true
+            settingsPopup.menu.getItem(sharedPref.getInt(SHARED_PREFERENCES_KEY, 0)).isChecked =
+                true
             settingsPopup.setOnMenuItemClickListener { item ->
 
                 item.isChecked = !item.isChecked
@@ -109,7 +107,9 @@ class MainActivity : Activity() {
         }
     }
 
-    fun readValues() {
+    fun readValues(): SensorData {
+        val sensorData = SensorData()
+
         try {
             sensorData.temperature = mBmx280.readTemperature()
             sensorData.humidity = mBmx280.readHumidity()
@@ -125,32 +125,82 @@ class MainActivity : Activity() {
             // error reading co2/tvoc
         }
 
-        try {
-            sensorData.pm25 = mSds011.readPM()[0]
-            sensorData.pm10 = mSds011.readPM()[1]
-        } catch (e: IOException) {
-            // error reading PM values
-        }
+        // sds011 will not throw an exception because the sensor decides when the data is available
+        // if the sensor becomes disconnected, it will simply not provide any data
+        sensorData.pm25 = mSds011.readPM()[0]
+        sensorData.pm10 = mSds011.readPM()[1]
+
+        return sensorData
     }
 
     private fun updateView(sensorData: SensorData) {
-        val temperatureView = temperature
-        val humidityView = humidity
-        val pressureView = pressure
-        val co2View = co2
-        val tvocView = tvoc
-        val pm25View = pm25
-        val pm10View = pm10
+        updateValues(sensorData)
+        updateGraphics(sensorData)
+    }
 
-        temperatureView.text = String.format("%.1f", sensorData.temperature)
-        humidityView.text = String.format("%.1f", sensorData.temperature)
-        pressureView.text = String.format("%.1f", sensorData.pressure)
+    private fun updateValues(sensorData: SensorData) {
+        val (temperature, humidity, pressure, co2, tvoc, pm25, pm10) = sensorData
 
-        co2View.text = sensorData.co2.toString()
-        tvocView.text = sensorData.tvoc.toString()
+        // update values
+        temperature_value.text = String.format("%.1f", temperature)
+        humidity_value.text = String.format("%.1f", humidity)
+        pressure_value.text = String.format("%.1f", pressure)
 
-        pm25View.text = String.format("%.1f", sensorData.pm25)
-        pm10View.text = String.format("%.1f", sensorData.pm10)
+        co2_value.text = co2.toString()
+        tvoc_value.text = tvoc.toString()
+
+        pm25_value.text = String.format("%.1f", pm25)
+        pm10_value.text = String.format("%.1f", pm10)
+    }
+
+    private fun updateGraphics(sensorData: SensorData) {
+        val (temperature, humidity, pressure, co2, tvoc, pm25, pm10) = sensorData
+
+        // update graphics and text
+        if (temperature !in Constants.TEMPERATURE_THRESHOLD_LOW..Constants.TEMPERATURE_THRESHOLD_HIGH || humidity !in Constants.HUMIDITY_THRESHOLD_LOW..Constants.HUMIDITY_THRESHOLD_HIGH || co2 > Constants.CO2_THRESHOLD_HIGH || pm25 > Constants.PM25_THRESHOLD_HIGH || pm10 > Constants.PM10_THRESHOLD_HIGH || tvoc > Constants.TVOC_THRESHOLD_HIGH) {
+            background_image.setImageResource(R.drawable.red)
+            status_image.setImageResource(R.drawable.bad)
+            status.text = getString(R.string.status_bad)
+        } else if (temperature !in Constants.TEMPERATURE_THRESHOLD_MID_LOW..Constants.TEMPERATURE_THRESHOLD_MID_HIGH || humidity !in Constants.HUMIDITY_THRESHOLD_MID_LOW..Constants.HUMIDITY_THRESHOLD_MID_HIGH || co2 > Constants.CO2_THRESHOLD_MID_HIGH || pm25 > Constants.PM25_THRESHOLD_MID_HIGH || pm10 > Constants.PM10_THRESHOLD_MID_HIGH || tvoc > Constants.TVOC_THRESHOLD_MID_HIGH) {
+            background_image.setImageResource(R.drawable.yellow)
+            status_image.setImageResource(R.drawable.fair)
+            status.text = getString(R.string.status_fair)
+        } else {
+            background_image.setImageResource(R.drawable.green)
+            status_image.setImageResource(R.drawable.good)
+            status.text = getString(R.string.status_good)
+        }
+
+        status_label.text = ""
+
+        if (temperature < Constants.TEMPERATURE_THRESHOLD_MID_LOW) {
+            status_label.append(if (status_label.text.isBlank()) getString(R.string.low_temperaure_advice) else getString(
+                            R.string.low_temperaure_advice_cont))
+        }
+        if (temperature > Constants.TEMPERATURE_THRESHOLD_MID_HIGH) {
+            status_label.append(if (status_label.text.isBlank()) getString(R.string.high_temperaure_advice) else getString(
+                            R.string.high_temperaure_advice_cont))
+        }
+        if (humidity < Constants.HUMIDITY_THRESHOLD_MID_LOW) {
+            status_label.append(if (status_label.text.isBlank()) getString(R.string.low_humidity_advice) else getString(
+                            R.string.low_humidity_advice_cont))
+        }
+        if (humidity > Constants.HUMIDITY_THRESHOLD_MID_HIGH) {
+            status_label.append(if (status_label.text.isBlank()) getString(R.string.high_humidity_advice) else getString(
+                            R.string.high_humidity_advice_cont))
+        }
+        if (co2 > Constants.CO2_THRESHOLD_MID_HIGH || tvoc > Constants.TVOC_THRESHOLD_MID_HIGH) {
+            status_label.append(if (status_label.text.isBlank()) getString(R.string.high_co2_tvoc_advice) else getString(
+                            R.string.high_co2_tvoc_advice_cont))
+        }
+        if (pm25 > Constants.PM25_THRESHOLD_MID_HIGH || pm10 > Constants.PM10_THRESHOLD_MID_HIGH) {
+            status_label.append(if (status_label.text.isBlank()) getString(R.string.high_pm25_pm10_advice) else getString(
+                            R.string.high_pm25_pm10_advice_cont))
+        }
+        if (temperature in Constants.TEMPERATURE_THRESHOLD_MID_LOW..Constants.TEMPERATURE_THRESHOLD_MID_HIGH && humidity in Constants.HUMIDITY_THRESHOLD_MID_LOW..Constants.HUMIDITY_THRESHOLD_MID_HIGH && co2 < Constants.CO2_THRESHOLD_MID_HIGH && pm25 < Constants.PM25_THRESHOLD_MID_HIGH && pm10 < Constants.PM10_THRESHOLD_MID_HIGH && tvoc < Constants.TVOC_THRESHOLD_MID_HIGH) {
+            status_label.append(if (status_label.text.isBlank()) getString(R.string.everything_good) else getString(
+                            R.string.everything_good_cont))
+        }
     }
 
     private fun setIntervalMode(id: Int) {
@@ -162,23 +212,23 @@ class MainActivity : Activity() {
             }
             1 -> {
                 mInterval = Constants.UPDATE_INTERVAL_SHORT
-                mCcs811.setMode(Ccs811.MODE_10S)
+                mCcs811.setMode(Ccs811.MODE_1S)
                 mSds011.setMode(Sds011.MODE_CONTINUOUS)
             }
             2 -> {
                 mInterval = Constants.UPDATE_INTERVAL_MEDIUM
-                mCcs811.setMode(Ccs811.MODE_60S)
-                mSds011.setMode(Sds011.MODE_1MIN)
+                mCcs811.setMode(Ccs811.MODE_1S)
+                mSds011.setMode(Sds011.MODE_CONTINUOUS)
             }
             3 -> {
                 mInterval = Constants.UPDATE_INTERVAL_LONG
-                mCcs811.setMode(Ccs811.MODE_60S)
-                mSds011.setMode(Sds011.MODE_10MIN)
+                mCcs811.setMode(Ccs811.MODE_10S)
+                mSds011.setMode(Sds011.MODE_1MIN)
             }
             4 -> {
                 mInterval = Constants.UPDATE_INTERVAL_EXTRA_LONG
-                mCcs811.setMode(Ccs811.MODE_60S)
-                mSds011.setMode(Sds011.MODE_10MIN)
+                mCcs811.setMode(Ccs811.MODE_10S)
+                mSds011.setMode(Sds011.MODE_1MIN)
             }
         }
     }

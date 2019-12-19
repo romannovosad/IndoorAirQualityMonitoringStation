@@ -7,6 +7,5 @@ data class SensorData(
     var co2: Int = 0,
     var tvoc: Int = 0,
     var pm25: Float = 0f,
-    var pm10: Float = 0f,
-    var posixTime: Long = 0
+    var pm10: Float = 0f
 )

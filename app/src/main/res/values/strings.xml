@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Indoor Air Quality Monitoring Station</string>
+    <string name="status_bad">Bad</string>
+    <string name="status_fair">Fair</string>
+    <string name="status_good">Good</string>
+    <string name="low_temperaure_advice">Turn up the heating</string>
+    <string name="low_temperaure_advice_cont">, turn up the heating</string>
+    <string name="high_temperaure_advice">Turn down the heating</string>
+    <string name="high_temperaure_advice_cont">, turn down the heading</string>
+    <string name="low_humidity_advice">Turn on the humidifier</string>
+    <string name="low_humidity_advice_cont">, turn on the humidifier</string>
+    <string name="high_humidity_advice">Turn on the dehumidifier</string>
+    <string name="high_humidity_advice_cont">, turn on the dehumidifier</string>
+    <string name="high_co2_tvoc_advice">Open the window</string>
+    <string name="high_co2_tvoc_advice_cont">, open the window</string>
+    <string name="high_pm25_pm10_advice">Turn on the air purifier</string>
+    <string name="high_pm25_pm10_advice_cont">, turn on the air purifier</string>
+    <string name="everything_good">Everything looks good</string>
+    <string name="everything_good_cont">, everything looks good</string>
+    <string name="update_interval_short">3 seconds</string>
+    <string name="update_interval_extra_short">1 second</string>
+    <string name="update_interval_medium">5 seconds</string>
+    <string name="update_interval_long">1 minute</string>
+    <string name="update_interval_extra_long">10 minutes</string>
 </resources>
