@@ -54,7 +54,6 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
 
         val sharedPref = getSharedPreferences(SHARED_PREFERENCES_KEY, PRIVATE_MODE)
-        setIntervalMode(sharedPref.getInt(SHARED_PREFERENCES_KEY, 0))
 
         val settingsButton = findViewById<ImageView>(R.id.settings_button)
         settingsButton.setOnClickListener {
@@ -90,6 +89,7 @@ class MainActivity : Activity() {
         }
 
         initializeSensors()
+        setIntervalMode(sharedPref.getInt(SHARED_PREFERENCES_KEY, 0))
         // start repeating measurements
         mPeriodicSensorMeasurement.run()
     }
@@ -110,6 +110,7 @@ class MainActivity : Activity() {
             // Ensure the sensor is powered and not sleeping before trying to read from it
             mBmx280.setMode(Bmx280.MODE_NORMAL)
             mSds011.setMode(Sds011.MODE_REPORT)
+            mCcs811.setMode(Ccs811.MODE_1S)
         } catch (e: IOException) {
             // couldn't configure the device...
             Log.e(TAG, "Error opening the sensors")
@@ -128,8 +129,9 @@ class MainActivity : Activity() {
         }
 
         try {
-            sensorData.co2 = mCcs811.readAlgorithmResults()[0]
-            sensorData.tvoc = mCcs811.readAlgorithmResults()[1]
+            val ccs811Results = mCcs811.readAlgorithmResults().clone()
+            sensorData.co2 = ccs811Results[0]
+            sensorData.tvoc = ccs811Results[1]
         } catch (e: IOException) {
             Log.e(TAG, "Error reading co2/tvoc")
         }
@@ -216,27 +218,22 @@ class MainActivity : Activity() {
         when (id) {
             0 -> {
                 mInterval = Constants.UPDATE_INTERVAL_EXTRA_SHORT
-                mCcs811.setMode(Ccs811.MODE_1S)
                 mSds011.setMode(Sds011.MODE_CONTINUOUS)
             }
             1 -> {
                 mInterval = Constants.UPDATE_INTERVAL_SHORT
-                mCcs811.setMode(Ccs811.MODE_1S)
                 mSds011.setMode(Sds011.MODE_CONTINUOUS)
             }
             2 -> {
                 mInterval = Constants.UPDATE_INTERVAL_MEDIUM
-                mCcs811.setMode(Ccs811.MODE_1S)
                 mSds011.setMode(Sds011.MODE_CONTINUOUS)
             }
             3 -> {
                 mInterval = Constants.UPDATE_INTERVAL_LONG
-                mCcs811.setMode(Ccs811.MODE_10S)
                 mSds011.setMode(Sds011.MODE_1MIN)
             }
             4 -> {
                 mInterval = Constants.UPDATE_INTERVAL_EXTRA_LONG
-                mCcs811.setMode(Ccs811.MODE_10S)
                 mSds011.setMode(Sds011.MODE_1MIN)
             }
         }
