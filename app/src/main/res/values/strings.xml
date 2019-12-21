@@ -30,7 +30,7 @@
     <string name="co2_label">CO2</string>
     <string name="tvoc_label">TVOC</string>
     <string name="humidity_unit">%</string>
-    <string name="tvoc_unit">ppm</string>
+    <string name="tvoc_unit">ppb</string>
     <string name="pm10_unit">ug/m3</string>
     <string name="pm25_unit">ug/m3</string>
     <string name="pressure_unit">hPa</string>
