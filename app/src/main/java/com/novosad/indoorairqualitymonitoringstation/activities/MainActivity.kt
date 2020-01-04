@@ -113,7 +113,7 @@ class MainActivity : Activity() {
             mCcs811.setMode(Ccs811.MODE_1S)
         } catch (e: IOException) {
             // couldn't configure the device...
-            Log.e(TAG, "Error opening the sensors")
+            Log.e(TAG, "Error opening the sensors" + e.stackTrace)
         }
     }
 
@@ -169,15 +169,15 @@ class MainActivity : Activity() {
 
         // update graphics and text
         if (temperature !in Constants.TEMPERATURE_THRESHOLD_LOW..Constants.TEMPERATURE_THRESHOLD_HIGH || humidity !in Constants.HUMIDITY_THRESHOLD_LOW..Constants.HUMIDITY_THRESHOLD_HIGH || co2 > Constants.CO2_THRESHOLD_HIGH || pm25 > Constants.PM25_THRESHOLD_HIGH || pm10 > Constants.PM10_THRESHOLD_HIGH || tvoc > Constants.TVOC_THRESHOLD_HIGH) {
-            background_image.setImageResource(R.drawable.red)
+            background_image.setImageResource(R.drawable.background_image_bad)
             status_image.setImageResource(R.drawable.bad)
             status.text = getString(R.string.status_bad)
         } else if (temperature !in Constants.TEMPERATURE_THRESHOLD_MID_LOW..Constants.TEMPERATURE_THRESHOLD_MID_HIGH || humidity !in Constants.HUMIDITY_THRESHOLD_MID_LOW..Constants.HUMIDITY_THRESHOLD_MID_HIGH || co2 > Constants.CO2_THRESHOLD_MID_HIGH || pm25 > Constants.PM25_THRESHOLD_MID_HIGH || pm10 > Constants.PM10_THRESHOLD_MID_HIGH || tvoc > Constants.TVOC_THRESHOLD_MID_HIGH) {
-            background_image.setImageResource(R.drawable.yellow)
+            background_image.setImageResource(R.drawable.background_image_fair)
             status_image.setImageResource(R.drawable.fair)
             status.text = getString(R.string.status_fair)
         } else {
-            background_image.setImageResource(R.drawable.green)
+            background_image.setImageResource(R.drawable.background_image_good)
             status_image.setImageResource(R.drawable.good)
             status.text = getString(R.string.status_good)
         }
@@ -208,7 +208,7 @@ class MainActivity : Activity() {
             status_label.append(if (status_label.text.isBlank()) getString(R.string.high_pm25_pm10_advice) else getString(
                             R.string.high_pm25_pm10_advice_cont))
         }
-        if (temperature in Constants.TEMPERATURE_THRESHOLD_MID_LOW..Constants.TEMPERATURE_THRESHOLD_MID_HIGH && humidity in Constants.HUMIDITY_THRESHOLD_MID_LOW..Constants.HUMIDITY_THRESHOLD_MID_HIGH && co2 < Constants.CO2_THRESHOLD_MID_HIGH && pm25 < Constants.PM25_THRESHOLD_MID_HIGH && pm10 < Constants.PM10_THRESHOLD_MID_HIGH && tvoc < Constants.TVOC_THRESHOLD_MID_HIGH) {
+        if (temperature in Constants.TEMPERATURE_THRESHOLD_MID_LOW..Constants.TEMPERATURE_THRESHOLD_MID_HIGH && humidity in Constants.HUMIDITY_THRESHOLD_MID_LOW..Constants.HUMIDITY_THRESHOLD_MID_HIGH && co2 <= Constants.CO2_THRESHOLD_MID_HIGH && pm25 <= Constants.PM25_THRESHOLD_MID_HIGH && pm10 <= Constants.PM10_THRESHOLD_MID_HIGH && tvoc <= Constants.TVOC_THRESHOLD_MID_HIGH) {
             status_label.append(if (status_label.text.isBlank()) getString(R.string.everything_good) else getString(
                             R.string.everything_good_cont))
         }
