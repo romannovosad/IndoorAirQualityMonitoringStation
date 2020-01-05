@@ -93,32 +93,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/settings_button"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@null"
-        android:scaleType="fitXY"
-        android:src="@drawable/update_interval_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/info_button"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="415dp"
-        android:contentDescription="@null"
-        android:scaleType="fitXY"
-        android:src="@drawable/info"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/temperature_value"
         android:layout_width="wrap_content"
@@ -439,6 +413,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:contentDescription="@null"
         android:src="@drawable/attention"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/humidity_value"
@@ -446,8 +421,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/background_overlay_middle_1"
         app:layout_constraintTop_toTopOf="@+id/background_overlay_middle_1"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:contentDescription="@null" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
 
     <ImageView
@@ -455,6 +429,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:contentDescription="@null"
         android:src="@drawable/attention"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/co2_value"
@@ -462,14 +437,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/background_overlay_middle_2"
         app:layout_constraintTop_toTopOf="@+id/background_overlay_middle_2"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:contentDescription="@null" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageView
         android:id="@+id/tvoc_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:contentDescription="@null"
         android:src="@drawable/attention"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/tvoc_value"
@@ -477,14 +452,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/background_overlay_right_2"
         app:layout_constraintTop_toTopOf="@+id/background_overlay_right_2"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:contentDescription="@null" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageView
         android:id="@+id/pm25_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:contentDescription="@null"
         android:src="@drawable/attention"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/pm25_value"
@@ -492,14 +467,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/background_overlay_middle_3"
         app:layout_constraintTop_toTopOf="@+id/background_overlay_middle_3"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:contentDescription="@null" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageView
         android:id="@+id/pm10_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:contentDescription="@null"
         android:src="@drawable/attention"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/pm10_value"
@@ -507,7 +482,33 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/background_overlay_right_3"
         app:layout_constraintTop_toTopOf="@+id/background_overlay_right_3"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:contentDescription="@null" />
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <ImageView
+        android:id="@+id/info_button"
+        android:layout_width="800dp"
+        android:layout_height="480dp"
+        android:layout_gravity="start"
+        android:contentDescription="@null"
+        android:paddingStart="20dp"
+        android:paddingTop="415dp"
+        android:paddingEnd="735dp"
+        android:paddingBottom="20dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/settings_button"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_gravity="start"
+        android:contentDescription="@null"
+        android:padding="20dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/update_interval_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

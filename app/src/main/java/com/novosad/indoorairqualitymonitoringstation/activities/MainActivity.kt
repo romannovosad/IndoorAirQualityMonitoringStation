@@ -1,22 +1,24 @@
 package com.novosad.indoorairqualitymonitoringstation.activities
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.ImageView
+import android.widget.PopupMenu
+import androidx.fragment.app.FragmentActivity
+import com.novosad.indoorairqualitymonitoringstation.R
+import com.novosad.indoorairqualitymonitoringstation.contstants.Constants
 import com.novosad.indoorairqualitymonitoringstation.drivers.Bmx280
 import com.novosad.indoorairqualitymonitoringstation.drivers.Ccs811
 import com.novosad.indoorairqualitymonitoringstation.drivers.Sds011
+import com.novosad.indoorairqualitymonitoringstation.fragments.FireMissilesDialogFragment
 import com.novosad.indoorairqualitymonitoringstation.models.SensorData
-import com.novosad.indoorairqualitymonitoringstation.contstants.Constants
-import com.novosad.indoorairqualitymonitoringstation.R
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
+
 
 private const val TAG = "Sensor"
 private const val SHARED_PREFERENCES_KEY = "mode"
@@ -33,7 +35,7 @@ private const val PRIVATE_MODE = Context.MODE_PRIVATE
  *
  * @author Roman Novosad
  */
-class MainActivity : Activity() {
+class MainActivity : FragmentActivity() {
 
     private val mBmx280 = Bmx280(Constants.BMX280_PORT)
     private val mCcs811 = Ccs811(Constants.CCS811_PORT)
@@ -93,6 +95,10 @@ class MainActivity : Activity() {
         setIntervalMode(sharedPref.getInt(SHARED_PREFERENCES_KEY, 0))
         // start repeating measurements
         mPeriodicSensorMeasurement.run()
+
+        info_button.setOnClickListener {
+            FireMissilesDialogFragment().show(supportFragmentManager, "info")
+        }
     }
 
     override fun onDestroy() {
@@ -238,32 +244,53 @@ class MainActivity : Activity() {
         status_label.text = ""
 
         if (temperature < Constants.TEMPERATURE_THRESHOLD_MID_LOW) {
-            status_label.append(if (status_label.text.isBlank()) getString(R.string.low_temperaure_advice) else getString(
-                R.string.low_temperaure_advice_cont))
+            status_label.append(
+                if (status_label.text.isBlank()) getString(R.string.low_temperaure_advice) else getString(
+                    R.string.low_temperaure_advice_cont
+                )
+            )
         }
         if (temperature > Constants.TEMPERATURE_THRESHOLD_MID_HIGH) {
-            status_label.append(if (status_label.text.isBlank()) getString(R.string.high_temperaure_advice) else getString(
-                R.string.high_temperaure_advice_cont))
+            status_label.append(
+                if (status_label.text.isBlank()) getString(R.string.high_temperaure_advice) else getString(
+                    R.string.high_temperaure_advice_cont
+                )
+            )
         }
         if (humidity < Constants.HUMIDITY_THRESHOLD_MID_LOW) {
-            status_label.append(if (status_label.text.isBlank()) getString(R.string.low_humidity_advice) else getString(
-                R.string.low_humidity_advice_cont))
+            status_label.append(
+                if (status_label.text.isBlank()) getString(R.string.low_humidity_advice) else getString(
+                    R.string.low_humidity_advice_cont
+                )
+            )
         }
         if (humidity > Constants.HUMIDITY_THRESHOLD_MID_HIGH) {
-            status_label.append(if (status_label.text.isBlank()) getString(R.string.high_humidity_advice) else getString(
-                R.string.high_humidity_advice_cont))
+            status_label.append(
+                if (status_label.text.isBlank()) getString(R.string.high_humidity_advice) else getString(
+                    R.string.high_humidity_advice_cont
+                )
+            )
         }
         if (co2 > Constants.CO2_THRESHOLD_MID_HIGH || tvoc > Constants.TVOC_THRESHOLD_MID_HIGH) {
-            status_label.append(if (status_label.text.isBlank()) getString(R.string.high_co2_tvoc_advice) else getString(
-                R.string.high_co2_tvoc_advice_cont))
+            status_label.append(
+                if (status_label.text.isBlank()) getString(R.string.high_co2_tvoc_advice) else getString(
+                    R.string.high_co2_tvoc_advice_cont
+                )
+            )
         }
         if (pm25 > Constants.PM25_THRESHOLD_MID_HIGH || pm10 > Constants.PM10_THRESHOLD_MID_HIGH) {
-            status_label.append(if (status_label.text.isBlank()) getString(R.string.high_pm25_pm10_advice) else getString(
-                R.string.high_pm25_pm10_advice_cont))
+            status_label.append(
+                if (status_label.text.isBlank()) getString(R.string.high_pm25_pm10_advice) else getString(
+                    R.string.high_pm25_pm10_advice_cont
+                )
+            )
         }
         if (temperature in Constants.TEMPERATURE_THRESHOLD_MID_LOW..Constants.TEMPERATURE_THRESHOLD_MID_HIGH && humidity in Constants.HUMIDITY_THRESHOLD_MID_LOW..Constants.HUMIDITY_THRESHOLD_MID_HIGH && co2 <= Constants.CO2_THRESHOLD_MID_HIGH && pm25 <= Constants.PM25_THRESHOLD_MID_HIGH && pm10 <= Constants.PM10_THRESHOLD_MID_HIGH && tvoc <= Constants.TVOC_THRESHOLD_MID_HIGH) {
-            status_label.append(if (status_label.text.isBlank()) getString(R.string.everything_good) else getString(
-                R.string.everything_good_cont))
+            status_label.append(
+                if (status_label.text.isBlank()) getString(R.string.everything_good) else getString(
+                    R.string.everything_good_cont
+                )
+            )
         }
     }
 
