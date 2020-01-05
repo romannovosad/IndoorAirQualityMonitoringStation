@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.novosad.indoorairqualitymonitoringstation.drivers.Bmx280
 import com.novosad.indoorairqualitymonitoringstation.drivers.Ccs811
 import com.novosad.indoorairqualitymonitoringstation.drivers.Sds011
@@ -147,6 +148,7 @@ class MainActivity : Activity() {
     private fun updateView(sensorData: SensorData) {
         updateValues(sensorData)
         updateGraphics(sensorData)
+        updateStatusText(sensorData)
     }
 
     private fun updateValues(sensorData: SensorData) {
@@ -165,9 +167,9 @@ class MainActivity : Activity() {
     }
 
     private fun updateGraphics(sensorData: SensorData) {
-        val (temperature, humidity, pressure, co2, tvoc, pm25, pm10) = sensorData
+        val (temperature, humidity, _, co2, tvoc, pm25, pm10) = sensorData
 
-        // update graphics and text
+        // update status graphics
         if (temperature !in Constants.TEMPERATURE_THRESHOLD_LOW..Constants.TEMPERATURE_THRESHOLD_HIGH || humidity !in Constants.HUMIDITY_THRESHOLD_LOW..Constants.HUMIDITY_THRESHOLD_HIGH || co2 > Constants.CO2_THRESHOLD_HIGH || pm25 > Constants.PM25_THRESHOLD_HIGH || pm10 > Constants.PM10_THRESHOLD_HIGH || tvoc > Constants.TVOC_THRESHOLD_HIGH) {
             background_image.setImageResource(R.drawable.background_image_bad)
             status_image.setImageResource(R.drawable.bad)
@@ -182,35 +184,86 @@ class MainActivity : Activity() {
             status.text = getString(R.string.status_good)
         }
 
+        // update individual sensor status graphics
+        if (temperature !in Constants.TEMPERATURE_THRESHOLD_MID_LOW..Constants.TEMPERATURE_THRESHOLD_MID_HIGH) {
+            background_overlay_left.setImageResource(R.drawable.background_overlay_warning_left)
+        } else {
+            background_overlay_left.setImageResource(R.drawable.background_overlay_left)
+        }
+
+        if (humidity !in Constants.HUMIDITY_THRESHOLD_MID_LOW..Constants.HUMIDITY_THRESHOLD_MID_HIGH) {
+            background_overlay_middle_1.setImageResource(R.drawable.background_overlay_warning_middle)
+            humidity_icon.visibility = View.VISIBLE
+        } else {
+            background_overlay_middle_1.setImageResource(R.drawable.background_overlay_middle)
+            humidity_icon.visibility = View.GONE
+        }
+
+        if (co2 > Constants.CO2_THRESHOLD_MID_HIGH) {
+            background_overlay_middle_2.setImageResource(R.drawable.background_overlay_warning_middle)
+            co2_icon.visibility = View.VISIBLE
+        } else {
+            background_overlay_middle_2.setImageResource(R.drawable.background_overlay_middle)
+            co2_icon.visibility = View.GONE
+        }
+
+        if (pm25 > Constants.PM25_THRESHOLD_MID_HIGH) {
+            background_overlay_middle_3.setImageResource(R.drawable.background_overlay_warning_middle)
+            pm25_icon.visibility = View.VISIBLE
+        } else {
+            background_overlay_middle_3.setImageResource(R.drawable.background_overlay_middle)
+            pm25_icon.visibility = View.GONE
+        }
+
+        if (tvoc > Constants.TVOC_THRESHOLD_MID_HIGH) {
+            background_overlay_right_2.setImageResource(R.drawable.background_overlay_warning_right)
+            tvoc_icon.visibility = View.VISIBLE
+        } else {
+            background_overlay_right_2.setImageResource(R.drawable.background_overlay_right)
+            tvoc_icon.visibility = View.GONE
+        }
+
+        if (pm10 > Constants.PM10_THRESHOLD_MID_HIGH) {
+            background_overlay_right_3.setImageResource(R.drawable.background_overlay_warning_right)
+            pm10_icon.visibility = View.VISIBLE
+        } else {
+            background_overlay_right_3.setImageResource(R.drawable.background_overlay_right)
+            pm10_icon.visibility = View.GONE
+        }
+    }
+
+    private fun updateStatusText(sensorData: SensorData) {
+        val (temperature, humidity, _, co2, tvoc, pm25, pm10) = sensorData
+
         status_label.text = ""
 
         if (temperature < Constants.TEMPERATURE_THRESHOLD_MID_LOW) {
             status_label.append(if (status_label.text.isBlank()) getString(R.string.low_temperaure_advice) else getString(
-                            R.string.low_temperaure_advice_cont))
+                R.string.low_temperaure_advice_cont))
         }
         if (temperature > Constants.TEMPERATURE_THRESHOLD_MID_HIGH) {
             status_label.append(if (status_label.text.isBlank()) getString(R.string.high_temperaure_advice) else getString(
-                            R.string.high_temperaure_advice_cont))
+                R.string.high_temperaure_advice_cont))
         }
         if (humidity < Constants.HUMIDITY_THRESHOLD_MID_LOW) {
             status_label.append(if (status_label.text.isBlank()) getString(R.string.low_humidity_advice) else getString(
-                            R.string.low_humidity_advice_cont))
+                R.string.low_humidity_advice_cont))
         }
         if (humidity > Constants.HUMIDITY_THRESHOLD_MID_HIGH) {
             status_label.append(if (status_label.text.isBlank()) getString(R.string.high_humidity_advice) else getString(
-                            R.string.high_humidity_advice_cont))
+                R.string.high_humidity_advice_cont))
         }
         if (co2 > Constants.CO2_THRESHOLD_MID_HIGH || tvoc > Constants.TVOC_THRESHOLD_MID_HIGH) {
             status_label.append(if (status_label.text.isBlank()) getString(R.string.high_co2_tvoc_advice) else getString(
-                            R.string.high_co2_tvoc_advice_cont))
+                R.string.high_co2_tvoc_advice_cont))
         }
         if (pm25 > Constants.PM25_THRESHOLD_MID_HIGH || pm10 > Constants.PM10_THRESHOLD_MID_HIGH) {
             status_label.append(if (status_label.text.isBlank()) getString(R.string.high_pm25_pm10_advice) else getString(
-                            R.string.high_pm25_pm10_advice_cont))
+                R.string.high_pm25_pm10_advice_cont))
         }
         if (temperature in Constants.TEMPERATURE_THRESHOLD_MID_LOW..Constants.TEMPERATURE_THRESHOLD_MID_HIGH && humidity in Constants.HUMIDITY_THRESHOLD_MID_LOW..Constants.HUMIDITY_THRESHOLD_MID_HIGH && co2 <= Constants.CO2_THRESHOLD_MID_HIGH && pm25 <= Constants.PM25_THRESHOLD_MID_HIGH && pm10 <= Constants.PM10_THRESHOLD_MID_HIGH && tvoc <= Constants.TVOC_THRESHOLD_MID_HIGH) {
             status_label.append(if (status_label.text.isBlank()) getString(R.string.everything_good) else getString(
-                            R.string.everything_good_cont))
+                R.string.everything_good_cont))
         }
     }
 
