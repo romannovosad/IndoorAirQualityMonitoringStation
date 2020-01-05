@@ -73,19 +73,6 @@ class MainActivity : FragmentActivity() {
                 setIntervalMode(item.order)
                 resetPeriodicMeasurements()
 
-                // prevent menu from closing on item click
-                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW)
-                item.actionView = View(this)
-                item.setOnActionExpandListener(object :
-                    MenuItem.OnActionExpandListener {
-                    override fun onMenuItemActionExpand(item: MenuItem): Boolean {
-                        return false
-                    }
-
-                    override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
-                        return false
-                    }
-                })
                 false
             }
             settingsPopup.show()
