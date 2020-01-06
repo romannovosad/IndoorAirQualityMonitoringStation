@@ -4,17 +4,17 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentTransaction
 import com.novosad.indoorairqualitymonitoringstation.R
 import com.novosad.indoorairqualitymonitoringstation.contstants.Constants
 import com.novosad.indoorairqualitymonitoringstation.drivers.Bmx280
 import com.novosad.indoorairqualitymonitoringstation.drivers.Ccs811
 import com.novosad.indoorairqualitymonitoringstation.drivers.Sds011
-import com.novosad.indoorairqualitymonitoringstation.fragments.FireMissilesDialogFragment
+import com.novosad.indoorairqualitymonitoringstation.fragments.InfoDialogFragment
 import com.novosad.indoorairqualitymonitoringstation.models.SensorData
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
@@ -84,7 +84,15 @@ class MainActivity : FragmentActivity() {
         mPeriodicSensorMeasurement.run()
 
         info_button.setOnClickListener {
-            FireMissilesDialogFragment().show(supportFragmentManager, "info")
+            // show the fragment fullscreen
+            val transaction = supportFragmentManager.beginTransaction()
+            // transition animation
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            // 'content' root view as the container for fullscreen fragment
+            transaction
+                .add(android.R.id.content, InfoDialogFragment())
+                .addToBackStack(null)
+                .commit()
         }
     }
 
