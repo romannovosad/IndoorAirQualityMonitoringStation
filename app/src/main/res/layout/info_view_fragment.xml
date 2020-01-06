@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/main_layout"
-    android:background="@color/transparentBlack">
+    android:background="@color/transparentBlack"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        android:src="@drawable/info_dialog_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/info_dialog_background"
-        android:contentDescription="@null" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="460dp"
@@ -59,8 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:gravity="center"
-                android:text="@string/temperature_description"
-                android:textAppearance="@style/InfoDialogBodyText" />
+                android:textAppearance="@style/InfoDialogBodyText"
+                tools:text="@string/temperature_description" />
 
             <TextView
                 android:id="@+id/info_dialog_humidity"
@@ -68,8 +69,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2sp"
                 android:gravity="center"
-                android:text="@string/relative_humidity_rh"
-                android:textAppearance="@style/InfoDialogHeading2Text" />
+                android:textAppearance="@style/InfoDialogHeading2Text"
+                tools:text="@string/relative_humidity_rh" />
 
             <TextView
                 android:id="@+id/info_dialog_humidity_description"
@@ -77,8 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:gravity="center"
-                android:text="@string/humidity_description"
-                android:textAppearance="@style/InfoDialogBodyText" />
+                android:textAppearance="@style/InfoDialogBodyText"
+                tools:text="@string/humidity_description" />
 
             <TextView
                 android:id="@+id/info_dialog_pressure"
@@ -86,8 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2sp"
                 android:gravity="center"
-                android:text="@string/atmospheric_pressure"
-                android:textAppearance="@style/InfoDialogHeading2Text" />
+                android:textAppearance="@style/InfoDialogHeading2Text"
+                tools:text="@string/atmospheric_pressure" />
 
             <TextView
                 android:id="@+id/info_dialog_pressure_description"
@@ -95,8 +96,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:gravity="center"
-                android:text="@string/pressure_description"
-                android:textAppearance="@style/InfoDialogBodyText" />
+                android:textAppearance="@style/InfoDialogBodyText"
+                tools:text="@string/pressure_description" />
 
             <TextView
                 android:id="@+id/info_dialog_co2"
@@ -104,9 +105,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2sp"
                 android:gravity="center"
-                android:text="@string/co2"
+                android:paddingBottom="5sp"
                 android:textAppearance="@style/InfoDialogHeading2Text"
-                android:paddingBottom="5sp"/>
+                tools:text="@string/co2" />
 
             <TextView
                 android:id="@+id/info_dialog_co2_description"
@@ -114,8 +115,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:gravity="center"
-                android:text="@string/co2_description"
-                android:textAppearance="@style/InfoDialogBodyText" />
+                android:textAppearance="@style/InfoDialogBodyText"
+                tools:text="@string/co2_description" />
 
             <TextView
                 android:id="@+id/info_dialog_tvoc"
@@ -123,8 +124,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2sp"
                 android:gravity="center"
-                android:text="@string/tvoc"
-                android:textAppearance="@style/InfoDialogHeading2Text" />
+                android:textAppearance="@style/InfoDialogHeading2Text"
+                tools:text="@string/tvoc" />
 
             <TextView
                 android:id="@+id/info_dialog_tvoc_description"
@@ -132,8 +133,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:gravity="center"
-                android:text="@string/tvoc_description"
-                android:textAppearance="@style/InfoDialogBodyText" />
+                android:textAppearance="@style/InfoDialogBodyText"
+                tools:text="@string/tvoc_description" />
 
             <TextView
                 android:id="@+id/info_dialog_pm25"
@@ -141,8 +142,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2sp"
                 android:gravity="center"
-                android:text="@string/pm25"
-                android:textAppearance="@style/InfoDialogHeading2Text" />
+                android:textAppearance="@style/InfoDialogHeading2Text"
+                tools:text="@string/pm25" />
 
             <TextView
                 android:id="@+id/info_dialog_pm25_description"
@@ -150,8 +151,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:gravity="center"
-                android:text="@string/pm25_description"
-                android:textAppearance="@style/InfoDialogBodyText" />
+                android:textAppearance="@style/InfoDialogBodyText"
+                tools:text="@string/pm25_description" />
 
             <TextView
                 android:id="@+id/info_dialog_pm10"
@@ -159,8 +160,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2sp"
                 android:gravity="center"
-                android:text="@string/pm10"
-                android:textAppearance="@style/InfoDialogHeading2Text" />
+                android:textAppearance="@style/InfoDialogHeading2Text"
+                tools:text="@string/pm10" />
 
             <TextView
                 android:id="@+id/info_dialog_pm10_description"
@@ -168,16 +169,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:gravity="center"
-                android:text="@string/pm10_description"
-                android:textAppearance="@style/InfoDialogBodyText" />
+                android:textAppearance="@style/InfoDialogBodyText"
+                tools:text="@string/pm10_description" />
 
             <TextView
                 android:id="@+id/info_dialog_caption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/caption"
-                android:textAppearance="@style/InfoDialogCaptionText" />
+                android:textAppearance="@style/InfoDialogCaptionText"
+                tools:text="@string/caption" />
         </LinearLayout>
     </ScrollView>
 
