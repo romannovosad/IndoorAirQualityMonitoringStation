@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
@@ -58,9 +57,8 @@ class MainActivity : FragmentActivity() {
 
         val sharedPref = getSharedPreferences(SHARED_PREFERENCES_KEY, PRIVATE_MODE)
 
-        val settingsButton = findViewById<ImageView>(R.id.settings_button)
-        settingsButton.setOnClickListener {
-            val settingsPopup = PopupMenu(this@MainActivity, settingsButton)
+        settings_button.setOnClickListener {
+            val settingsPopup = PopupMenu(this@MainActivity, settings_button)
             settingsPopup.menuInflater.inflate(R.menu.popup_menu, settingsPopup.menu)
             settingsPopup.menu.getItem(sharedPref.getInt(SHARED_PREFERENCES_KEY, 0)).isChecked =
                 true

@@ -40,15 +40,39 @@
         <item name="android:fontFamily">@font/varela_round</item>
     </style>
 
+    <style name="SensorValuesLabelText" parent="TextAppearance.AppCompat.Display1">
+        <item name="android:textColor">@color/colorFont</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+    </style>
+
     <style name="SensorValuesUnitText" parent="TextAppearance.AppCompat.Display1">
         <item name="android:textColor">@color/colorFont</item>
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/varela_round</item>
     </style>
 
-    <style name="SensorValuesLabelText" parent="TextAppearance.AppCompat.Display1">
+    <style name="InfoDialogHeading1Text" parent="TextAppearance.AppCompat.Display1">
         <item name="android:textColor">@color/colorFont</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:fontFamily">@font/varela_round</item>
+    </style>
+
+    <style name="InfoDialogHeading2Text" parent="TextAppearance.AppCompat.Display1">
+        <item name="android:textColor">@color/colorFont</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/varela_round</item>
+    </style>
+
+    <style name="InfoDialogBodyText" parent="TextAppearance.AppCompat.Display1">
+        <item name="android:textColor">@color/colorFont</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+    </style>
+
+    <style name="InfoDialogCaptionText" parent="TextAppearance.AppCompat.Display1">
+        <item name="android:textColor">@color/colorFont</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/quicksand_medium</item>
     </style>
 </resources>

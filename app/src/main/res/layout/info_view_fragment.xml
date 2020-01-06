@@ -4,11 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/main_layout">
+    android:id="@+id/main_layout"
+    android:background="@color/transparentBlack">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/info_dialog_background"
+        android:contentDescription="@null" />
 
     <ScrollView
-        android:layout_width="400dp"
+        android:layout_width="460dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="35dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,102 +36,149 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textview_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Air Quality Monitoring" />
-
-            <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/info_dialog_heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Temperature" />
+                android:layout_marginBottom="8sp"
+                android:gravity="center"
+                android:text="@string/air_quality_monitoring_description_heading"
+                android:textAppearance="@style/InfoDialogHeading1Text" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/info_dialog_temperature"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Optimum living temperature is between 19 and 22 degrees. \n Thresholds: 17, 22, 25 and 27 degrees." />
+                android:layout_marginBottom="2sp"
+                android:gravity="center"
+                android:text="@string/temperature"
+                android:textAppearance="@style/InfoDialogHeading2Text" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/info_dialog_temperature_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Relative Humidity (RH)" />
+                android:layout_marginBottom="8sp"
+                android:gravity="center"
+                android:text="@string/temperature_description"
+                android:textAppearance="@style/InfoDialogBodyText" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/info_dialog_humidity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="The ideal relative humidity for health and comfort is about 40–50%. In the winter months, it may have to be lower than 40% RH to avoid condensation on the windows. Thresholds: 30%, 40%, 50% and 60%." />
+                android:layout_marginBottom="2sp"
+                android:gravity="center"
+                android:text="@string/relative_humidity_rh"
+                android:textAppearance="@style/InfoDialogHeading2Text" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/info_dialog_humidity_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Atmospheric Pressure" />
+                android:layout_marginBottom="8sp"
+                android:gravity="center"
+                android:text="@string/humidity_description"
+                android:textAppearance="@style/InfoDialogBodyText" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/info_dialog_pressure"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Informative value, does not pose any risks at normal levels." />
+                android:layout_marginBottom="2sp"
+                android:gravity="center"
+                android:text="@string/atmospheric_pressure"
+                android:textAppearance="@style/InfoDialogHeading2Text" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/info_dialog_pressure_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CO2" />
+                android:layout_marginBottom="8sp"
+                android:gravity="center"
+                android:text="@string/pressure_description"
+                android:textAppearance="@style/InfoDialogBodyText" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/info_dialog_co2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Concentration of CO2 in Earth's atmosphere is about 410 ppm (parts per million). Concentrations up to 800 ppm are typical for occupied indoor spaces. At over 1000 ppm, complaints of drowsiness and poor air start to occur. Thresholds: 800 and 1000 ppm." />
+                android:layout_marginBottom="2sp"
+                android:gravity="center"
+                android:text="@string/co2"
+                android:textAppearance="@style/InfoDialogHeading2Text"
+                android:paddingBottom="5sp"/>
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/info_dialog_co2_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TVOC" />
+                android:layout_marginBottom="8sp"
+                android:gravity="center"
+                android:text="@string/co2_description"
+                android:textAppearance="@style/InfoDialogBodyText" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/info_dialog_tvoc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TVOC means the total concentration of multiple VOCs (Volatile Organic Compounds) present simultaneously in the air. Generally, TVOC concentrations between 50 ppb (parts per billion) and 300 ppb are thought to be acceptable.  Similarly, it's often recommended that indoor air TVOC concentrations not exceed 500 ppb. Thresholds: 300 and 500 ppb." />
+                android:layout_marginBottom="2sp"
+                android:gravity="center"
+                android:text="@string/tvoc"
+                android:textAppearance="@style/InfoDialogHeading2Text" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/info_dialog_tvoc_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PM 2.5" />
+                android:layout_marginBottom="8sp"
+                android:gravity="center"
+                android:text="@string/tvoc_description"
+                android:textAppearance="@style/InfoDialogBodyText" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/info_dialog_pm25"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PM2.5 refers to atmospheric particulate matter (PM) that have a diameter of less than 2.5 micrometers, which is about 3% the diameter of a human hair. Studies have found a close link between exposure to fine particles and premature death from heart and lung disease. Acceptable levels are up to 30 μg/m3, levels above 50 μg/m3 are unhealthy. Thresholds: 30 and 50 μg/m3." />
+                android:layout_marginBottom="2sp"
+                android:gravity="center"
+                android:text="@string/pm25"
+                android:textAppearance="@style/InfoDialogHeading2Text" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/info_dialog_pm25_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PM 10" />
+                android:layout_marginBottom="8sp"
+                android:gravity="center"
+                android:text="@string/pm25_description"
+                android:textAppearance="@style/InfoDialogBodyText" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/info_dialog_pm10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PM with diameter between 2.5 and 10 micrometers. These particles are still inhalable and can contribute to heart and lung diseases. Acceptable levels are up to 100 μg/m3, levels above 200 μg/m3 are unhealthy. Thresholds: 100 and 200 μg/m3." />
+                android:layout_marginBottom="2sp"
+                android:gravity="center"
+                android:text="@string/pm10"
+                android:textAppearance="@style/InfoDialogHeading2Text" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/info_dialog_pm10_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="In case of any request or suggestion for this device, you can contact the author at romannovosad11@gmail.com." />
+                android:layout_marginBottom="8sp"
+                android:gravity="center"
+                android:text="@string/pm10_description"
+                android:textAppearance="@style/InfoDialogBodyText" />
 
-
+            <TextView
+                android:id="@+id/info_dialog_caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/caption"
+                android:textAppearance="@style/InfoDialogCaptionText" />
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
