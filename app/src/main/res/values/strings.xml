@@ -38,18 +38,18 @@
     <string name="temperature_unit">°C</string>
     <string name="air_quality_monitoring_description_heading">Air Quality Monitoring Info</string>
     <string name="temperature">Temperature</string>
-    <string name="temperature_description">Optimum living temperature is between 19 and 22 degrees.\nThresholds: %1.0f, %2.0f, %3.0f and %4.0f degrees.</string>
+    <string name="temperature_description">Optimum living temperature is between 19 and 22 degrees.\nThresholds: %.0f, %.0f, %.0f and %.0f degrees.</string>
     <string name="relative_humidity_rh">Relative Humidity (RH)</string>
-    <string name="humidity_description">The ideal relative humidity for health and comfort is about 40–50%%. In the winter months, it may have to be lower than 40%% RH to avoid condensation on the windows.\nThresholds: %1.0f%%, %2.0f%%, %3.0f%% and %4.0f%%.</string>
+    <string name="humidity_description">The ideal relative humidity for health and comfort is about 40–50%%. In the winter months, it may have to be lower than 40%% RH to avoid condensation on the windows.\nThresholds: %.0f%%, %.0f%%, %.0f%% and %.0f%%.</string>
     <string name="atmospheric_pressure">Atmospheric Pressure</string>
     <string name="pressure_description">Informative value, does not pose any risks at normal levels.</string>
     <string name="co2">CO<sub>2</sub></string>
-    <string name="co2_description">Concentration of CO<sub>2</sub> in Earth\'s atmosphere is about 410 ppm (parts per million). Concentrations up to 800 ppm are typical for occupied indoor spaces. At over 1000 ppm, complaints of drowsiness and poor air start to occur.\nThresholds: %1d and %d ppm.</string>
+    <string name="co2_description">Concentration of CO<sub>2</sub> in Earth\'s atmosphere is about 410 ppm (parts per million). Concentrations up to 800 ppm are typical for occupied indoor spaces. At over 1000 ppm, complaints of drowsiness and poor air start to occur.\nThresholds: %d and %d ppm.</string>
     <string name="tvoc">TVOC</string>
-    <string name="tvoc_description">TVOC means the total concentration of multiple VOCs (Volatile Organic Compounds) present simultaneously in the air. Generally, TVOC concentrations between 50 ppb (parts per billion) and 300 ppb are thought to be acceptable. Similarly, it\'s often recommended that indoor air TVOC concentrations not exceed 500 ppb.\nThresholds: %1d and %2d ppb.</string>
+    <string name="tvoc_description">TVOC means the total concentration of multiple VOCs (Volatile Organic Compounds) present simultaneously in the air. Generally, TVOC concentrations between 50 ppb (parts per billion) and 300 ppb are thought to be acceptable. Similarly, it\'s often recommended that indoor air TVOC concentrations not exceed 500 ppb.\nThresholds: %d and %d ppb.</string>
     <string name="pm25">PM 2.5</string>
-    <string name="pm25_description">PM2.5 refers to atmospheric particulate matter (PM) that have a diameter of less than 2.5 micrometers, which is about 3%% the diameter of a human hair. Studies have found a close link between exposure to fine particles and premature death from heart and lung disease. Acceptable levels are up to 30 μg/m3, levels above 50 μg/m3 are unhealthy.\nThresholds: %1.0f and %2.0f μg/m3.</string>
+    <string name="pm25_description">PM2.5 refers to atmospheric particulate matter (PM) that have a diameter of less than 2.5 micrometers, which is about 3%% the diameter of a human hair. Studies have found a close link between exposure to fine particles and premature death from heart and lung disease. Acceptable levels are up to 30 μg/m3, levels above 50 μg/m3 are unhealthy.\nThresholds: %.0f and %.0f μg/m3.</string>
     <string name="pm10">PM 10</string>
-    <string name="pm10_description">PM with diameter between 2.5 and 10 micrometers. These particles are still inhalable and can contribute to heart and lung diseases. Acceptable levels are up to 100 μg/m<sup>3</sup>, levels above 200 μg/m<sup>3</sup> are unhealthy.\nThresholds: %1.0f and %2.0f μg/m<sup>3</sup>.</string>
+    <string name="pm10_description">PM with diameter between 2.5 and 10 micrometers. These particles are still inhalable and can contribute to heart and lung diseases. Acceptable levels are up to 100 μg/m<sup>3</sup>, levels above 200 μg/m<sup>3</sup> are unhealthy.\nThresholds: %.0f and %.0f μg/m<sup>3</sup>.</string>
     <string name="caption">In case of any request or suggestion for this device, you can contact the author at romannovosad11@gmail.com.</string>
 </resources>
