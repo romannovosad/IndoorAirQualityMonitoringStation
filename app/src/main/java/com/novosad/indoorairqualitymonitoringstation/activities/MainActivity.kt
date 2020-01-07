@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.PopupMenu
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.novosad.indoorairqualitymonitoringstation.R
 import com.novosad.indoorairqualitymonitoringstation.contstants.Constants
 import com.novosad.indoorairqualitymonitoringstation.drivers.Bmx280
@@ -17,6 +19,7 @@ import com.novosad.indoorairqualitymonitoringstation.fragments.InfoDialogFragmen
 import com.novosad.indoorairqualitymonitoringstation.models.SensorData
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
+import java.time.format.DateTimeFormatter
 
 
 private const val TAG = "Sensor"
@@ -46,7 +49,8 @@ class MainActivity : FragmentActivity() {
 
     private var mPeriodicSensorMeasurement: Runnable = object : Runnable {
         override fun run() {
-            updateView(readValues())
+            val sensorData = readValues()
+            updateView(sensorData)
             mHandler.postDelayed(this, mInterval.toLong())
         }
     }
@@ -171,15 +175,15 @@ class MainActivity : FragmentActivity() {
         // update status graphics
         if (temperature !in Constants.TEMPERATURE_THRESHOLD_LOW..Constants.TEMPERATURE_THRESHOLD_HIGH || humidity !in Constants.HUMIDITY_THRESHOLD_LOW..Constants.HUMIDITY_THRESHOLD_HIGH || co2 > Constants.CO2_THRESHOLD_HIGH || pm25 > Constants.PM25_THRESHOLD_HIGH || pm10 > Constants.PM10_THRESHOLD_HIGH || tvoc > Constants.TVOC_THRESHOLD_HIGH) {
             background_image.setImageResource(R.drawable.background_image_bad)
-            status_image.setImageResource(R.drawable.bad)
+            status_image.setImageResource(R.drawable.bad_main_graphic)
             status.text = getString(R.string.status_bad)
         } else if (temperature !in Constants.TEMPERATURE_THRESHOLD_MID_LOW..Constants.TEMPERATURE_THRESHOLD_MID_HIGH || humidity !in Constants.HUMIDITY_THRESHOLD_MID_LOW..Constants.HUMIDITY_THRESHOLD_MID_HIGH || co2 > Constants.CO2_THRESHOLD_MID_HIGH || pm25 > Constants.PM25_THRESHOLD_MID_HIGH || pm10 > Constants.PM10_THRESHOLD_MID_HIGH || tvoc > Constants.TVOC_THRESHOLD_MID_HIGH) {
             background_image.setImageResource(R.drawable.background_image_fair)
-            status_image.setImageResource(R.drawable.fair)
+            status_image.setImageResource(R.drawable.fair_main_graphic)
             status.text = getString(R.string.status_fair)
         } else {
             background_image.setImageResource(R.drawable.background_image_good)
-            status_image.setImageResource(R.drawable.good)
+            status_image.setImageResource(R.drawable.good_main_graphic)
             status.text = getString(R.string.status_good)
         }
 
