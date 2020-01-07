@@ -8,8 +8,6 @@ import android.view.View
 import android.widget.PopupMenu
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.novosad.indoorairqualitymonitoringstation.R
 import com.novosad.indoorairqualitymonitoringstation.contstants.Constants
 import com.novosad.indoorairqualitymonitoringstation.drivers.Bmx280
@@ -19,7 +17,6 @@ import com.novosad.indoorairqualitymonitoringstation.fragments.InfoDialogFragmen
 import com.novosad.indoorairqualitymonitoringstation.models.SensorData
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
-import java.time.format.DateTimeFormatter
 
 
 private const val TAG = "Sensor"
