@@ -11,8 +11,8 @@ object Constants {
     const val CCS811_PORT = "I2C2"
     const val SDS011_PORT = "UART6" // PeripheralManager.getInstance().getUartDeviceList().get(0)
 
-    const val TEMPERATURE_THRESHOLD_MID_HIGH = 23f
-    const val TEMPERATURE_THRESHOLD_HIGH = 25f
+    const val TEMPERATURE_THRESHOLD_MID_HIGH = 25f
+    const val TEMPERATURE_THRESHOLD_HIGH = 27f
     const val TEMPERATURE_THRESHOLD_MID_LOW = 19f
     const val TEMPERATURE_THRESHOLD_LOW = 17f
     const val HUMIDITY_THRESHOLD_MID_HIGH = 55f
@@ -27,4 +27,6 @@ object Constants {
     const val PM25_THRESHOLD_HIGH = 80f
     const val PM10_THRESHOLD_MID_HIGH = 100f
     const val PM10_THRESHOLD_HIGH = 200f
+
+    const val TEMPERATURE_CORRECTION_FACTOR = 1f
 }

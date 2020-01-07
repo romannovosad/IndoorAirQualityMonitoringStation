@@ -121,7 +121,7 @@ class MainActivity : FragmentActivity() {
         val sensorData = SensorData()
 
         try {
-            sensorData.temperature = mBmx280.readTemperature()
+            sensorData.temperature = correctTemperature(mBmx280.readTemperature())
             sensorData.humidity = mBmx280.readHumidity()
             sensorData.pressure = mBmx280.readPressure()
         } catch (e: IOException) {
@@ -326,5 +326,9 @@ class MainActivity : FragmentActivity() {
     private fun resetPeriodicMeasurements() {
         mHandler.removeCallbacks(mPeriodicSensorMeasurement)
         mPeriodicSensorMeasurement.run()
+    }
+
+    private fun correctTemperature(temperature: Float): Float {
+        return temperature - Constants.TEMPERATURE_CORRECTION_FACTOR
     }
 }
