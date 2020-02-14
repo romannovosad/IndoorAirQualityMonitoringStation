@@ -41,6 +41,7 @@ public class Bmx280 implements AutoCloseable {
     public static final int CHIP_ID_BME280 = 0x60;
     /**
      * Default I2C address for the sensor.
+     * It's possible to switch the I2C address of the BME280 sensor to 0x77 instead of 0x76 for IMX7 by connecting both SDO and CSB to VCC.
      */
     public static final int DEFAULT_I2C_ADDRESS = 0x76;
     @Deprecated
