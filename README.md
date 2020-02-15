@@ -11,3 +11,5 @@ It contains a handy version of Nova PM SDS011 sensor Android Things driver writt
 ![](/screenshots/screenshot-info.png)
 
 ![](/screenshots/screenshot-dropdown.png)
+
+Built with help of drivers available [here](https://github.com/androidthings/contrib-drivers/tree/master/bmx280) and [here](https://github.com/rosterloh/androidthings-drivers/tree/master/ccs811).
